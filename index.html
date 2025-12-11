@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Nutrition App Mockups</title>
+    <style>
+        /* Base Styles and Layout */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            padding: 40px;
+        }
+
+        .phone-mockup {
+            width: 320px;
+            height: 680px;
+            background-color: #000;
+            border-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px 15px 5px 15px; /* Added top padding for 'notch' effect */
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Status Bar (Simulated) */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            font-size: 13px;
+            padding: 0 5px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .status-bar-left {
+            font-size: 15px;
+        }
+
+        .status-bar-right > span {
+            margin-left: 5px;
+        }
+
+        /* App Header and Navigation */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            padding: 10px 0;
+            font-size: 24px;
+        }
+
+        .header h2 {
+            font-size: 28px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .header-small {
+            font-size: 14px;
+            font-weight: 600;
+            color: #888;
+        }
+
+        .icon {
+            font-size: 20px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-bottom: 80px; /* Space for bottom nav */
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+            -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+        }
+        .content::-webkit-scrollbar { /* Hide scrollbar for Chrome, Safari and Opera */
+            display: none;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background-color: #000;
+            border-top: 1px solid #111;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 10;
+            border-radius: 0 0 40px 40px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #555;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .nav-item .icon {
+            font-size: 24px;
+            margin-bottom: 2px;
+            color: inherit;
+        }
+
+        .nav-item.active {
+            color: #007aff; /* Accent color */
+        }
+
+        .nav-item.add .icon {
+            color: #fff;
+            background-color: #007aff;
+            border-radius: 50%;
+            padding: 5px;
+            font-size: 30px;
+        }
+
+        /* Form/Input Elements */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #aaa;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background-color: #1a1a1a;
+            color: #fff;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #111;
+        }
+
+        .toggle-row:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-label {
+            color: #fff;
+            font-size: 16px;
+        }
+
+        /* Custom Toggle Switch (iOS style) */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 30px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #333;
+            transition: .4s;
+            border-radius: 30px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 24px;
+            width: 24px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #007aff;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        .button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 30px;
+            border: none;
+            border-radius: 12px;
+            background-color: #007aff;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-login .icon {
+            font-size: 24px;
+            color: #fff;
+        }
+
+        /* Dashboard Elements */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-card {
+            background-color: #1a1a1a;
+            border-radius: 12px;
+            padding: 15px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .card-subtitle {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .progress-bar-container {
+            height: 8px;
+            background-color: #333;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 60%; /* Example value */
+            background-color: #007aff;
+            border-radius: 4px;
+        }
+
+        .chart-container {
+            background-color: #1a1a1a;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .chart-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .fake-chart {
+            height: 100px;
+            background: repeating-linear-gradient(
+                45deg,
+                #222,
+                #222 10px,
+                #1a1a1a 10px,
+                #1a1a1a 20px
+            );
+            border-radius: 8px;
+            position: relative;
+        }
+        .fake-chart-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to right, #007aff, #007aff88);
+            opacity: 0.5;
+            border-radius: 0 0 8px 8px;
+        }
+
+        /* Log Screens */
+        .search-bar {
+            width: 100%;
+            padding: 12px;
+            background-color: #1a1a1a;
+            border-radius: 12px;
+            color: #fff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar .icon {
+            color: #555;
+            margin-right: 10px;
+        }
+
+        .search-bar input {
+            flex-grow: 1;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+        }
+        .search-bar input::placeholder {
+            color: #555;
+        }
+
+        .food-list-section {
+            margin-bottom: 20px;
+        }
+
+        .food-list-header {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .food-list {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .food-list::-webkit-scrollbar {
+            display: none;
+        }
+
+        .food-item {
+            flex-shrink: 0;
+            width: 100px;
+            text-align: center;
+        }
+
+        .food-item-img {
+            width: 100px;
+            height: 100px;
+            background-color: #333;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .food-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .food-item-name {
+            color: #fff;
+            font-size: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .recent-food-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #111;
+            color: #fff;
+        }
+
+        .food-info h4 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .food-info p {
+            margin: 0;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .food-add-icon {
+            font-size: 20px;
+            color: #007aff;
+            font-weight: 900;
+        }
+
+        /* Weight Tracker Elements */
+        .weight-goal {
+            background-color: #1a1a1a;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .weight-goal h3 {
+            color: #007aff;
+            font-size: 24px;
+            margin: 0;
+            font-weight: 900;
+        }
+
+        .weight-goal p {
+            color: #fff;
+            font-size: 16px;
+            margin: 5px 0 15px 0;
+        }
+
+        .current-weight {
+            font-size: 40px;
+            font-weight: 900;
+            color: #fff;
+            margin: 0;
+        }
+
+        .weight-change {
+            font-size: 18px;
+            color: #4cd964; /* Green for weight loss */
+            font-weight: 600;
+        }
+
+        .macro-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .macro-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #111;
+        }
+
+        .macro-item:last-child {
+            border-bottom: none;
+        }
+
+        .macro-name {
+            font-size: 16px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+        .macro-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .macro-unit {
+            font-size: 12px;
+            color: #888;
+            margin-left: 5px;
+        }
+
+        .macro-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .protein-dot { background-color: #ff9500; } /* Orange */
+        .carb-dot { background-color: #34c759; }    /* Green */
+        .fat-dot { background-color: #ff3b30; }     /* Red */
+        .fiber-dot { background-color: #5856d6; }   /* Indigo */
+
+        /* AI Scan Screen */
+        .ai-scan-header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .ai-scan-header h3 {
+            font-size: 24px;
+            margin: 0;
+            font-weight: 900;
+        }
+
+        .camera-view {
+            height: 350px;
+            background-color: #333;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .camera-view .overlay-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .ai-food-labels {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .ai-label {
+            background-color: rgba(0, 122, 255, 0.8);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .scan-button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 5px solid rgba(255, 255, 255, 0.5);
+            margin: 0 auto;
+            cursor: pointer;
+        }
+        
+    </style>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+</head>
+<body>
+
+    <script>
+        function getIcon(name) {
+            return `<span class="material-icons-outlined">${name}</span>`;
+        }
+    </script>
+
+
+    <div class="phone-mockup">
+        <div class="status-bar">
+            <span class="status-bar-left">9:41</span>
+            <div class="status-bar-right">
+                <span class="icon">signal_cellular_alt</span>
+                <span class="icon">wifi</span>
+                <span>100%</span>
+            </div>
+        </div>
+
+        <div class="header" style="text-align: center; justify-content: center; margin-bottom: 50px;">
+            <h2 style="color: #007aff;">DASHBOARD</h2>
+        </div>
+
+        <div class="content">
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" class="text-input" placeholder="you@example.com">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" class="text-input" placeholder="••••••••">
+            </div>
+
+            <div class="button">Log In</div>
+
+            <div style="text-align: center; margin-top: 30px; color: #888; font-size: 14px;">
+                — OR —
+            </div>
+
+            <div class="social-login">
+                <span class="icon" style="color: #4285f4;">&#xea88;</span> <span class="icon" style="color: #fff;">&#xeac9;</span> <span class="icon" style="color: #1877f2;">&#xea85;</span> </div>
+
+            <div style="text-align: center; margin-top: 40px; color: #fff; font-size: 14px;">
+                Don't have an account? <span style="color: #007aff; font-weight: 600;">Sign Up</span>
+            </div>
+        </div>
+        
+        <div class="bottom-nav">
+             </div>
+    </div>
+
+    <div class="phone-mockup">
+        <div class="status-bar">
+            <span class="status-bar-left">9:41</span>
+            <div class="status-bar-right">
+                <span class="icon">signal_cellular_alt</span>
+                <span class="icon">wifi</span>
+                <span>100%</span>
+            </div>
+        </div>
+
+        <div class="header" style="margin-bottom: 5px;">
+            <div class="header-small">STEP 1 OF 3</div>
+        </div>
+        <h2 style="color: #fff; font-size: 28px; font-weight: 900; margin: 0 0 20px 0;">TELL US ABOUT YOURSELF</h2>
+
+        <div class="content">
+            <div class="toggle-row">
+                <div class="toggle-label">Metric Units (kg/cm)</div>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="toggle-row">
+                <div class="toggle-label">Biological Sex</div>
+                <div class="toggle-label" style="font-weight: bold; color: #007aff;">Male</div>
+            </div>
+            <div class="toggle-row">
+                <div class="toggle-label">Age</div>
+                <div class="toggle-label" style="font-weight: bold; color: #007aff;">35</div>
+            </div>
+            <div class="toggle-row">
+                <div class="toggle-label">Current Weight (kg)</div>
+                <div class="toggle-label" style="font-weight: bold; color: #007aff;">80.5</div>
+            </div>
+            <div class="toggle-row">
+                <div class="toggle-label">Height (cm)</div>
+                <div class="toggle-label" style="font-weight: bold; color: #007aff;">180</div>
+            </div>
+            <div class="toggle-row">
+                <div class="toggle-label">Activity Level</div>
+                <div class="toggle-label" style="font-weight: bold; color: #007aff;">Moderate</div>
+            </div>
+            
+            <div class="button">CONTINUE TO STEP 2</div>
+        </div>
+        
+        <div class="bottom-nav">
+             </div>
+    </div>
+
+    <div class="phone-mockup">
+        <div class="status-bar">
+            <span class="status-bar-left">9:41</span>
+            <div class="status-bar-right">
+                <span class="icon">signal_cellular_alt</span>
+                <span class="icon">wifi</span>
+                <span>100%</span>
+            </div>
+        </div>
+
+        <div class="header-small">FRIDAY, DEC 11</div>
+        <h2 style="color: #fff; margin-bottom: 20px;">DASHBOARD</h2>
+
+        <div class="content">
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-title" style="color: #4cd964;">LOSE WEIGHT</div>
+                    <div class="card-subtitle">Goal: -0.5 kg/week</div>
+                    <h3 style="font-size: 36px; margin: 10px 0;">-0.6 kg</h3>
+                    <div class="card-subtitle">Avg. change last 7 days</div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-title" style="color: #007aff;">CALORIE TARGET</div>
+                    <div class="card-subtitle">Today's target</div>
+                    <h3 style="font-size: 36px; margin: 10px 0;">2,250</h3>
+                    <div class="card-subtitle">Remaining: 1,450 kcal</div>
+                </div>
+            </div>
+
+            <h3 style="color: #fff; font-size: 20px; margin: 0 0 10px 0;">Weekly Consumption</h3>
+            <div class="chart-container">
+                <div class="chart-title">Calorie Trend (Last 7 Days)</div>
+                <div class="fake-chart">
+                    <div class="fake-chart-line" style="height: 75%; background: linear-gradient(to right, #ff9500, #ff950088);"></div>
+                    <div style="position: absolute; top: 10px; right: 10px; color: #fff; font-size: 14px;">Avg: 2,150 kcal</div>
+                </div>
+            </div>
+
+            <h3 style="color: #fff; font-size: 20px; margin: 0 0 10px 0;">Insights & Analytics</h3>
+            <div class="chart-container">
+                <div class="chart-title">Protein Intake (Last 7 Days)</div>
+                <div class="fake-chart">
+                    <div class="fake-chart-line" style="height: 90%; background: linear-gradient(to right, #34c759, #34c75988);"></div>
+                    <div style="position: absolute; top: 10px; right: 10px; color: #fff; font-size: 14px;">Avg: 165g</div>
+                </div>
+                <div class="card-subtitle" style="text-align: right; margin-top: 10px;">Target: 150g. Excellent work!</div>
+            </div>
+
+        </div>
+
+        <div class="bottom-nav">
+            <div class="nav-item active">
+                <span class="icon">dashboard</span>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav-item">
+                <span class="icon">restaurant</span>
+                <span>Food Log</span>
+            </div>
+            <div class="nav-item add">
+                <span class="icon">add</span>
+            </div>
+            <div class="nav-item">
+                <span class="icon">analytics</span>
+                <span>Strategy</span>
+            </div>
+            <div class="nav-item">
+                <span class="icon">settings</span>
+                <span>More</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="phone-mockup">
+        <div class="status-bar">
+            <span class="status-bar-left">9:41</span>
+            <div class="status-bar-right">
+                <span class="icon">signal_cellular_alt</span>
+                <span class="icon">wifi</span>
+                <span>100%</span>
+            </div>
+        </div>
+
+        <div class="header-small">FRIDAY, DEC 11 | LUNCH</div>
+        <h2 style="color: #fff; margin-bottom: 20px;">AI SCANNER</h2>
+
+        <div class="content">
+            <div class="ai-scan-header">
+                <h3>Snap a photo to log your meal!</h3>
+            </div>
+            
+            <div class="camera-view">
+                <div class="ai-food-labels">
+                    <div class="ai-label">150g Chicken Breast</div>
+                    <div class="ai-label">200g Brown Rice</div>
+                    <div class="ai-label">50g Steamed Broccoli</div>
+                </div>
+                <div style="position: absolute; bottom: 20px; right: 20px; color: #fff; font-size: 14px; background-color: rgba(0,0,0,0.5); padding: 5px 10px; border-radius: 5px;">AI Confidence: 92%</div>
+            </div>
+            
+            <div class="scan-button"></div>
+            <p style="text-align: center; color: #888; margin-top: 10px; font-size: 14px;">Tap to confirm and log meal</p>
+
+            <div class="search-bar">
+                <span class="icon">search</span>
+                <input type="text" placeholder="Search for food manually...">
+            </div>
+        </div>
+        
+        <div class="bottom-nav">
+            <div class="nav-item">
+                <span class="icon">dashboard</span>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav-item active">
+                <span class="icon">restaurant</span>
+                <span>Food Log</span>
+            </div>
+            <div class="nav-item add">
+                <span class="icon">add</span>
+            </div>
+            <div class="nav-item">
+                <span class="icon">analytics</span>
+                <span>Strategy</span>
+            </div>
+            <div class="nav-item">
+                <span class="icon">settings</span>
+                <span>More</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="phone-mockup">
+        <div class="status-bar">
+            <span class="status-bar-left">9:41</span>
+            <div class="status-bar-right">
+                <span class="icon">signal_cellular_alt</span>
+                <span class="icon">wifi</span>
+                <span>100%</span>
+            </div>
+        </div>
+
+        <div class="header-small">FRIDAY, DEC 11 | BREAKFAST</div>
+        <h2 style="color: #fff; margin-bottom: 20px;">FOOD LOG</h2>
+
+        <div class="content">
+            <div class="search-bar">
+                <span class="icon">search</span>
+                <input type="text" placeholder="Search for a food, recipe, or barcode">
+            </div>
+
+            <div class="food-list-section">
+                <div class="food-list-header">⭐ Favorites</div>
+                <div class="food-list">
+                    <div class="food-item">
+                        <div class="food-item-img" style="background-color: #ff9500;"><span class="icon" style="font-size: 40px;">breakfast_dining</span></div>
+                        <div class="food-item-name">Oatmeal & Berries</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-item-img" style="background-color: #34c759;"><span class="icon" style="font-size: 40px;">egg</span></div>
+                        <div class="food-item-name">Scrambled Eggs</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-item-img" style="background-color: #5856d6;"><span class="icon" style="font-size: 40px;">local_dining</span></div>
+                        <div class="food-item-name">Protein Shake</div>
+                    </div>
+                    <div class="food-item">
+                        <div class="food-item-img" style="background-color: #ff3b30;"><span class="icon" style="font-size: 40px;">local_pizza</span></div>
+                        <div class="food-item-name">Chicken Salad</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="food-list-section">
+                <div class="food-list-header">🕓 Recently Logged</div>
+                <div class="recent-food-row">
+                    <div class="food-info">
+                        <h4>Chicken Breast, Cooked</h4>
+                        <p>150g | 250 kcal | P: 50g, C: 0g, F: 5g</p>
+                    </div>
+                    <div class="food-add-icon">+</div>
+                </div>
+                <div class="recent-food-row">
+                    <div class="food-info">
+                        <h4>Brown Rice, Steamed</h4>
+                        <p>200g | 280 kcal | P: 5g, C: 60g, F: 2g</p>
+                    </div>
+                    <div class="food-add-icon">+</div>
+                </div>
+                <div class="recent-food-row">
+                    <div class="food-info">
+                        <h4>Canned Tuna in Water</h4>
+                        <p>120g | 120 kcal | P: 28g, C: 0g, F: 1g</p>
+                    </div>
+                    <div class="food-add-icon">+</div>
+                </div>
+            </div>
+
+            <div class="food-list-section">
+                <div class="food-list-header">Common Foods</div>
+                <div class="recent-food-row">
+                    <div class="food-info">
+                        <h4>Apple, Medium</h4>
+                        <p>1 item | 95 kcal | P: 0g, C: 25g, F: 0g</p>
+                    </div>
+                    <div class="food-add-icon">+</div>
+                </div>
+                <div class="recent-food-row" style="border-bottom: none;">
+                    <div class="food-info">
+                        <h4>Peanut Butter</h4>
+                        <p>2 tbsp | 188 kcal | P: 8g, C: 6g, F: 16g</p>
+                    </div>
+                    <div class="food-add-icon">+</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bottom-nav">
+            <div class="nav-item">
+                <span class="icon">dashboard</span>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav-item active">
+                <span class="icon">restaurant</span>
+                <span>Food Log</span>
+            </div>
+            <div class="nav-item add">
+                <span class="icon">add</span>
+            </div>
+            <div class="nav-item">
+                <span class="icon">analytics</span>
+                <span>Strategy</span>
+            </div>
+            <div class="nav-item">
+                <span class="icon">settings</span>
+                <span>More</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="phone-mockup">
+        <div class="status-bar">
+            <span class="status-bar-left">9:41</span>
+            <div class="status-bar-right">
+                <span class="icon">signal_cellular_alt</span>
+                <span class="icon">wifi</span>
+                <span>100%</span>
+            </div>
+        </div>
+
+        <div class="header-small">FRIDAY, DEC 11</div>
+        <h2 style="color: #fff; margin-bottom: 20px;">STRATEGY & GOALS</h2>
+
+        <div class="content">
+            <div class="weight-goal">
+                <h3 style="color: #4cd964;">LOSE WEIGHT</h3>
+                <p>Goal: 75.0 kg</p>
+                <div style="display: flex; justify-content: space-around; align-items: center; margin: 15px 0;">
+                    <div>
+                        <div class="card-subtitle">START</div>
+                        <h4 class="current-weight" style="font-size: 28px;">80.5 kg</h4>
+                    </div>
+                    <span class="icon" style="font-size: 30px; color: #888;">arrow_forward</span>
+                    <div>
+                        <div class="card-subtitle">CURRENT</div>
+                        <h4 class="current-weight" style="font-size: 28px;">79.9 kg</h4>
+                    </div>
+                </div>
+                <p style="margin: 5px 0 0 0;"><span class="weight-change">↓ 0.6 kg</span> in 3 weeks</p>
+            </div>
+            
+            <h3 style="color: #fff; font-size: 20px; margin: 0 0 10px 0;">Weight Trend</h3>
+            <div class="chart-container">
+                <div class="chart-title">Last 30 Days</div>
+                <div class="fake-chart">
+                    <div class="fake-chart-line" style="height: 30%; background: linear-gradient(to right, #4cd964, #4cd96488);"></div>
+                    <div style="position: absolute; top: 10px; right: 10px; color: #fff; font-size: 14px;">Avg: -0.2 kg/week</div>
+                </div>
+            </div>
+
+            <h3 style="color: #fff; font-size: 20px; margin: 0 0 10px 0;">Daily Macro Targets</h3>
+            <ul class="macro-list">
+                <li class="macro-item">
+                    <div class="macro-name"><span class="macro-dot protein-dot"></span> Protein</div>
+                    <div class="macro-value">160<span class="macro-unit">g</span></div>
+                </li>
+                <li class="macro-item">
+                    <div class="macro-name"><span class="macro-dot carb-dot"></span> Carbohydrates</div>
+                    <div class="macro-value">250<span class="macro-unit">g</span></div>
+                </li>
+                <li class="macro-item">
+                    <div class="macro-name"><span class="macro-dot fat-dot"></span> Fat</div>
+                    <div class="macro-value">70<span class="macro-unit">g</span></div>
+                </li>
+                <li class="macro-item" style="border-bottom: none;">
+                    <div class="macro-name"><span class="macro-dot fiber-dot"></span> Fiber</div>
+                    <div class="macro-value">30<span class="macro-unit">g</span></div>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="bottom-nav">
+            <div class="nav-item">
+                <span class="icon">dashboard</span>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav-item">
+                <span class="icon">restaurant</span>
+                <span>Food Log</span>
+            </div>
+            <div class="nav-item add">
+                <span class="icon">add</span>
+            </div>
+            <div class="nav-item active">
+                <span class="icon">analytics</span>
+                <span>Strategy</span>
+            </div>
+            <div class="nav-item">
+                <span class="icon">settings</span>
+                <span>More</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
